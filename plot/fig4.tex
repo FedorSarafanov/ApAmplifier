@@ -1,0 +1,130 @@
+\documentclass[tikz]{standalone}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+% \usepackage[utf8x]{inputenc}
+
+\usepackage[russian]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\begin{document}
+	\begin{tikzpicture}
+		    \begin{axis}[
+			grid=both,
+			scale=1.2,
+			% xmode=log,
+			% grid style={line width=.1pt, draw=gray!1},
+			% major grid style={line width=.2pt,draw=gray!1},
+			% axis lines=middle,
+			% minor tick num=5,
+			% xmin=1000, 
+			% xmax=11,
+			% ymin=0,
+			% ymax=5,
+			xlabel={$f_\text{ген}$, Гц},
+			ylabel={$U_\text{вых}$, мВ},
+			tick style={very thick},
+		    % scale=0.5,
+		    grid=both,
+		    grid style={line width=.3pt, draw=black!15},
+		    major grid style={line width=.1pt,draw=black!39},
+		    minor y tick num=4,
+		    minor x tick num=4,
+		    % minor x tick num=4,   
+		     xmode=log,
+		    % xmode=log,ymode=normal,
+		    % ytick distance=0.1,
+		    % xtick distance=100,
+		    % ytick distance=0.098171875,
+		    % ymax = 4500,
+		    ymin=0,
+		    % xmin = 400,
+		    % xmax = 500,
+		    % ymin = 0,
+		    /pgf/number format/.cd,
+		    1000 sep={},
+		    x tick label style={scale=0.8},
+		    y tick label style={scale=0.8},
+		    % unit vector ratio*=1000 100,
+		    % legend style={at={(axis cs:0,0)}},
+			% yticklabel={
+			% \pgfmathparse{\tick/0.098171875/32}
+			% \pgfmathifisint{\pgfmathresult}{$\pgfmathprintnumber[int detect]{\pgfmathresult}{}$}%
+			% {%
+	  %          {$\pgfmathprintnumber[frac, frac denom=32,frac whole=false]{\pgfmathresult}\pi$}
+			% }{}
+			% },	
+			% yticklabel={0}			
+			% ytick={1.5707,0.7853,1,2}, 
+			% yticklabels={$\frac{\pi}{2}$,%
+			% $\frac{\pi}{4}$
+			% 1},			
+		    % xmax = 40,
+		    % ticklabel style={font=\tiny,fill=white},    
+		    % axis lines=middle, 	
+		    % xlabel style={right, xshift=1em},
+		    % ylabel style={above},	
+		    % x label style={at={(axis description cs:0.5,-0.08)},anchor=north},
+		    % y label style={at={(axis description cs:-0.08,.5)},rotate=90,anchor=south}	,
+		     % y dir=reverse
+		     % restrict y to domain=0:2,    		
+		     % restrict x to domain=0:3000,    		
+			% legend style={
+			% at={(rel axis cs:0,1)},
+			% anchor=north west,draw=none,inner sep=0pt,fill=gray!10}
+		]
+	     % \xdef\C{5e-8}
+	     % \xdef\R{13000}
+		\addplot +[mark=x, mark options={scale=1.5, line width=1pt}, line width=0.2pt,blue] plot [error bars/.cd, y dir = both, y explicit] table 
+		[			    	    	    	
+			x=f, 
+			% y=u, x expr=\thisrow{f},
+			y expr=\thisrow{u}/1000*2,
+			% y error=dz
+		] 
+		{../data/common_collector_freqamp.dat};
+	        % \addplot +[mark=*, mark size=1.2pt, mark color=red, only marks] plot [error bars/.cd, y dir = both, y explicit] table [x=i, y=d] {../data/11.tsv};
+	        % \addlegendentry{$U_c=-7$ В}
+ % f(x) = p1*x + p2
+% Coefficients (with 95% confidence bounds):
+       % p1 =       55.27  (53.42, 57.13)
+       % p2 =      -324.1  (-384.3, -263.9)
+
+	     % \addplot [samples=100, domain=8:75] {55.27*x-324.1};
+
+  % p1 =       16.57  (16.28, 16.86)
+       % p2 =      -81.71  (-109.8, -53.63)
+	     % \addplot [samples=100, domain=8:235] {16.51*x-81.71};
+
+	     % \addplot [samples=100, domain=70:3000*6.28, red] {sqrt(1+(x*\R*\C)^2)/(x*\C)};
+
+	     % \addplot [samples=100, domain=0:10, red] {-x*0.01/1.77};
+	     % \addplot [samples=100, domain=0:10, red] {-x*0.01/1.77};
+	     % \addplot [samples=100, domain=0:10, brown] {-x*0.01/1.33};
+	     % \addplot [samples=100, domain=0:10, black] {-x*0.01/1.14};
+	        % \addplot [samples=100, domain=106.5:240] {(x-106.5)/12.43};
+	        % \addplot [samples=100, line width=1pt, dashed, domain=0:10] {(x-0.15)*2.37/10};
+	        % \addlegendentry{Аппроксимация}
+
+	        % \addplot [samples=100, domain=0:52, dashdotdotted] {0.05215*e^(-(x-27)^2/2/(7.649)^2)};
+	        % \addlegendentry{$\sigma_k=7.649$}
+
+% 	        >
+% 	        General model:
+%      f(x) = (x-x0)/r0
+% Coefficients (with 95% confidence bounds):
+%        r0 =       12.38  (12.29, 12.47)
+%        x0 =       109.2  (108.7, 109.7)
+
+% Goodness of fit:
+%   SSE: 0.3017
+%   R-square: 0.9993
+%   Adjusted R-square: 0.9993
+%   RMSE: 0.07768
+
+		    \end{axis}
+		\end{tikzpicture}	
+\end{document}

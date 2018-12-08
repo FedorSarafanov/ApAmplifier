@@ -1,0 +1,6 @@
+PWD D:/лабы_рэ/ApAmplifier/ris
+INPUT c:/texlive/2018/texmf.cnf
+INPUT c:/texlive/2018/texmf-dist/web2c/texmf.cnf
+INPUT c:/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT oe.tex
+OUTPUT oe.log

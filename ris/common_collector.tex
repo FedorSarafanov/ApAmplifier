@@ -1,0 +1,122 @@
+\documentclass[border=0pt]{standalone}
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+
+\usepackage{xcolor}
+\definecolor{ochre}{HTML}{e2431e} % #e2431e 0
+\definecolor{lightorange}{HTML}{e7711b} % #e7711b 1
+\definecolor{lightyellow}{HTML}{f1ca3a} % #f1ca3a 2
+\definecolor{lightgreen}{HTML}{6f9654} % #6f9654 3
+\definecolor{osci}{HTML}{82FF27}%#82FF27
+\definecolor{sky}{HTML}{1c91c0} % #1c91c0 4
+\definecolor{violet}{HTML}{43459d} % #43459d 5
+
+
+\begin{document}
+\tikzset{Rs/.style={}}
+\ctikzset{bipoles/length=0.8cm}
+
+\begin{circuitikz}[]
+	\xdef\darkness{100}
+	\xdef\opa{0.3}
+	\xdef\SIZE{5}
+	% \xdef\setka{1}
+	\begin{scope}[xshift=7cm]
+		\input{setka}
+	\end{scope}
+
+	\tikzstyle{every node}=[font=\footnotesize, text=black]
+
+	\begin{scope}[color=black]
+
+		% % Схема с общим эмиттером. x=-1.5 .. 4
+		% \begin{scope}[xshift=0]
+		% \draw (-1,2) to[pR,Rs, *-, n=R1, l_=$R_1$] (0,2) to[C,Rs] (1,2);
+
+		% \draw (-1,2) |- ($(R1.wiper)+(0,0.25)$) -- (R1.wiper);
+
+		% \draw (2,2) node[npn, scale=1.2] (T1) {} node[right, xshift=0.5em,yshift=0em] {};
+
+		% \draw (T1) ++(-0.15,0) circle(0.35);
+
+		% \draw (T1.E)
+		% to[R,Rs,l_=$R_e$] (2,0);
+
+		% \draw (1,2) to[R] (1,4) to (2,4) to[R] (T1.C) to[short,*-] ++(1,0) to (3,2) to[] ++(1,0);
+
+
+		% \draw (1,0) to[R,Rs,l_=$$, -*] (1,2) to (T1.B);
+
+		% \draw (2,1.5) to[short,-*] ++(0,0) to[nos,l_=$K_1$] ++(1,0)
+		% to[C,Rs,l^=$C_{e}$] ++(0,-1.5);
+
+		% \draw (1,0) - ++(0,-0.25) node [rground, rotate=0] {};
+
+		% \draw (2,4) to[short,*-] ++ (1,0) coordinate (Ek);
+		% \draw[fill=white] (Ek) circle (2pt) node[above] {$+E_k$};
+		% \draw (1,0) 
+		% 	% to ++(1,0)
+		% 	to[short,*-] ++(1,0)
+		% 	% to[short,*-] ++(1,0)
+		% 	to[short,*-] ++(1,0);
+
+		% % \draw (-1.5,0) to[short,-*] (0,0);
+		% \draw (-1.5,2) to (-1,2);
+		% \end{scope}
+
+		% Подключение ОК слева
+		\begin{scope}[xshift=4cm]
+		% \draw (0,0) to ++(45:-0.3) (0,0) to ++(-45:-0.3);
+		\draw (0,2) to ++(45:-0.3) (0,2) to ++(-45:-0.3);	
+		\end{scope}
+
+		% Схема с общим коллектором
+		\begin{scope}[xshift=4cm]
+
+			\draw (3,4) coordinate (Ek-) to ++(0,-0.25) node[rground]{};
+
+			\draw[fill=white] (Ek-) circle (2pt) node[above] {$-E_k$};
+
+			\draw (2,0) - ++(0,-0.25) node [rground, rotate=0] {};
+			\draw (2,2) node[npn, scale=1.2] (T2) {} node[right, xshift=0.5em,yshift=0em] {};
+			\draw (T2) ++(-0.15,0) circle(0.35);
+
+			\draw (0,2) to[C]  (1,2) to (T2.B);
+
+			\draw (T2.E) to[R] (2,0);% to (0,0);
+			% \draw (2,0) to (3,0);
+
+			\draw (1,2) to[short,*-,R] ++ (0,2) to ++ (1,0) to (T2.C);
+			\draw (1,4) to[short, *-]  (0.5,4) coordinate (Ek2);
+
+			\draw[fill=white] (Ek2) circle (2pt) node[above] {$+E_k$};
+
+
+			\draw (T2.E) to[short,*-] ++(0,0) -| (2.5,2) to (3,2);
+		\end{scope}
+
+		% Выходная цепочка, x=0.. 2
+		\begin{scope}[xshift=7cm]
+		% \draw (1,0) to[pR,Rs, *-, n=R2, l_=$R_2$] (1,1)
+		% 	to[nos,l_=$K_2$] (1,2);
+
+		% \draw (1,0) -- (0.5,0) |- (R2.wiper);
+
+		\draw (0,2) to[C] (1,2);
+		% \draw (0,0) to[short,-*] (0,2);
+		% \draw (1,2) to[short,*-] (2,2);
+		\draw (1,2) to (2,2);
+		% \draw (0,0) to[short,-*] (0.5,0) to (1,0) to (2,0);
+
+		% \draw (1,0) - ++(0,-0.25) node [rground, rotate=0] {};
+		\end{scope}
+
+		% Подключение справа
+		\begin{scope}[xshift=9cm,xscale=-1]
+		% \draw (0,0) to ++(45:-0.3) (0,0) to ++(-45:-0.3);
+		\draw (0,2) to ++(45:-0.3) (0,2) to ++(-45:-0.3);	
+		\end{scope}
+		
+	\end{scope}
+
+\end{circuitikz}
+\end{document}
